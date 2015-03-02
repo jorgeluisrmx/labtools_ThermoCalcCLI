@@ -9,3 +9,4 @@ class RawCurveConverter(object):
     del horno correpondiente
     """
     pass
+        

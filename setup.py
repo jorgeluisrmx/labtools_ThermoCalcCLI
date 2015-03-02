@@ -12,10 +12,10 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'thermocalc-raw2curve = thermocalc.controllers:raw2curve',
+            'thermocalc-raw2curve = thermocalc.controllers:raw_to_curve',
             'thermocalc-curveview = thermocalc.controllers:curve_viewer',
-            'thermocalc-temp2pos = thermocalc.controllers:curve_regression',
-            'thermocalc-x2p = thermocalc.controllers:pos_from_thermocouple'
+            'thermocalc-regression = thermocalc.controllers:curve_regression',
+            'thermocalc-x2p = thermocalc.controllers:pos_from_couple'
         ]},
     url='',
     license='LICENSE.txt',
