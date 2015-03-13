@@ -48,7 +48,6 @@ Contents:
    howto
    models
    controllers
-   views
     
 
 

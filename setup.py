@@ -21,5 +21,5 @@ setup(
     license='LICENSE.txt',
     description='Conversor temperatura-posicion para hornos tubulares con interfaz en linea de comando',
     long_description=open('README.txt').read(),
-    install_requires=[ ],
+    install_requires=[numpy, scipy, matplotlib],
 )

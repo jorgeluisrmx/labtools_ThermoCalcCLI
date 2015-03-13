@@ -65,3 +65,23 @@ class TFurnance(object):
         :rtype: float
         """
         return ( Rval - 0.5 * (self.ltu - 2 * self.lte) ) / 10
+    
+    def R2p(self, Rval):
+        """
+        Convierte una medida de centro de tubo (R [mm]) a una medidad
+        de entrada de tubo (p [mm])
+        
+        :param Rval: longitud medida desde el centro del tubo en [mm]
+        :rtype: float
+        """
+        return 0.5 * self.ltu - Rval
+    
+    def p2R(self, pval):
+        """
+        Convierte una medida de de entrada de tubo (p [mm]) a una medidad
+        de centro de tubo (R [mm])
+        
+        :param pval: longitud medida desde la entrada del tubo en [mm]
+        :rtype: float
+        """
+        return 0.5 * self.ltu - pval

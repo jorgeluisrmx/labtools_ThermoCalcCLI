@@ -59,6 +59,42 @@ class Curve(object):
         """
         return self._y
     
+    @property
+    def xmin(self):
+        """
+        Getter para el valor minimo de x
+        
+        :rtype: float
+        """
+        return self._x[0]
+    
+    @property
+    def xmax(self):
+        """
+        Getter para el valor maximo de x
+        
+        :rtype: float
+        """
+        return self._x[-1]
+    
+    @property
+    def ymin(self):
+        """
+        Getter para el valor minimo de y
+        
+        :rtype: float
+        """
+        return min(self._y)
+    
+    @property
+    def ymax(self):
+        """
+        Getter para el valor maximo de y
+        
+        :rtype: float
+        """
+        return max(self._y)
+    
     
     def add_point(self, x, y):
         """
@@ -85,6 +121,6 @@ class Curve(object):
         new_y = [y for y in self._y[:-1]]
         new_x.reverse()
         new_y.reverse()
-        self._x = [-x for x in self._x]
+        self._x = [-x if x != 0 else x for x in self._x]
         self._x.extend(new_x)
         self._y.extend(new_y)
