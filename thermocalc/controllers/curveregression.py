@@ -18,6 +18,8 @@ def parse_sysargv():
                         type=float)
     group.add_argument("-p", "--pos", help="posicion de entrada objetivo [mm]: se busca temperatura correspondiente",
                         type=float)
+    parser.add_argument('-d', help="realiza la busqueda de la temperatura objetivo en el ala descendente de la curva",
+                        action="store_true")
     return parser.parse_args()
 
 # ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
@@ -60,12 +62,14 @@ def curve_regression():
     if args.temp != None:       # si se busca la posicion correspondiente a una temperatura
         if curva.ymin <= args.temp <= curva.ymax:                           # revision de temperatura
             restemp = args.temp
-            #Rpos = biseccion(f, restemp, curva.x[curva.y.index(max(curva.y))], curva.xmax)
-            Rpos = biseccion(f, restemp, curva.xmin, curva.x[curva.y.index(max(curva.y))])
+            if args.d:
+                Rpos = biseccion(f, restemp, curva.xmin, curva.x[curva.y.index(max(curva.y))])
+            else:
+                Rpos = biseccion(f, restemp, curva.x[curva.y.index(max(curva.y))], curva.xmax)
             respos = horno.R2p(Rpos)
-            msg = ''
+            msg = u'{}: {}°C -> {:0.2f}mm'.format(args.curvefile.split('.')[0], restemp, respos)
             graph = True
-            print msg
+            print u'\n    ' + msg + u'\n'
         else:
             graph = False
             print u"""\n    NO DATA: {}°C esta fuera del \
@@ -74,9 +78,9 @@ dominio de la curva: {}-{}°C\n""".format(args.temp, curva.ymin, curva.ymax)
         if horno.R2p(curva.xmax) <= args.pos <= horno.R2p(curva.xmin):      # revision del valor p
             restemp = float(f(horno.p2R(args.pos)))
             respos = args.pos
-            msg = u'\n    {}: {}mm -> {:0.2f}°C\n'.format(args.curvefile.split('.')[0], respos, restemp)
+            msg = u'{}: {}mm -> {:0.2f}°C'.format(args.curvefile.split('.')[0], respos, restemp)
             graph = True
-            print msg
+            print u'\n    ' + msg + u'\n'
         else:
             graph = False
             print """\n    NO DATA: {}mm (desde la entrada del tubo) esta fuera del \

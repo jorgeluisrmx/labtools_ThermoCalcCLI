@@ -54,7 +54,7 @@ thermocalc-regression
 .. code-block:: bash
     
     $ thermocalc-regression -h
-    usage: thermocalc-regression [-h] (-t TEMP | -p POS) curvefile
+    usage: thermocalc-regression [-h] (-t TEMP | -p POS) [-d] curvefile
 
     conversor temperatura-posición y posición-temperatura para distribuciones
     .curve
@@ -68,6 +68,8 @@ thermocalc-regression
                             correspondiente
       -p POS, --pos POS     posicion de entrada objetivo [mm]: se busca
                             temperatura correspondiente
+      -d                    realiza la busqueda de la temperatura objetivo en el
+                            ala descendente de la curva
 
     
     # temperatura-posicion 
